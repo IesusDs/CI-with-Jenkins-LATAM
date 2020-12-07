@@ -6,7 +6,7 @@ pipeline {
     PROJECT_ID = "iesusds"
     CLUSTER_NAME = 'kube-demo'
     LOCATION = 'southamerica-east1-b'
-    CREDENTIALS_ID = 'JSON'
+    CREDENTIALS_ID = 'gke'
   }   
  stages {
      stage('Checkout SCM') {
