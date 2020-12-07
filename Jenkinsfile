@@ -3,10 +3,10 @@ pipeline {
  agent any
  
  environment {
-    PROJECT_ID = "vaulted-quarter-260801"
+    PROJECT_ID = "iesusds"
     CLUSTER_NAME = 'kube-demo'
-    LOCATION = 'us-central1-c'
-    CREDENTIALS_ID = 'gcr'
+    LOCATION = 'southamerica-east1-b'
+    CREDENTIALS_ID = 'JSON'
   }   
  stages {
      stage('Checkout SCM') {
@@ -29,11 +29,13 @@ pipeline {
      }
      stage('Build and push Docker Image') {
       steps{
-        script {
+        echo "Build and push Docker Image"
+         script {
            //appimage = docker.build( "almitarosita/devops:${env.BUILD_ID}")
-           appimage = docker.build("gcr.io/vaulted-quarter-260801/devops:${env.BUILD_ID}")
-           //docker.withRegistry("https://registry.hub.docker.com",'docker-hub-credentials') 
-           docker.withRegistry('https://gcr.io','gcr:gcr'){
+           appimage = docker.build("iesusds/devops:${env.BUILD_ID}")
+           //appimage = docker.build("gcr.io/vaulted-quarter-260801/devops:${env.BUILD_ID}")
+           docker.withRegistry("https://registry.hub.docker.com",'docker-hub-credentials') 
+           //docker.withRegistry('https://gcr.io','gcr:gcr'){
               appimage.push("${env.BUILD_ID}")
            }
          }
